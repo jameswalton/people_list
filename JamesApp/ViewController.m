@@ -7,32 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "PeopleViewController.h"
 
 @implementation ViewController
 
-@synthesize peopleListArray;
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Tapped row");
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PeopleListTable"];
-    
-    if (cell == nil) {
-        
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"PeopleListTable"];
-        
-    }
-    
-    cell.textLabel.text = [peopleListArray objectAtIndex:indexPath.row];
-    
-    return cell;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [peopleListArray count];
-}
+@synthesize navigationController;
 
 - (void)didReceiveMemoryWarning
 {
@@ -45,8 +24,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    peopleListArray = [[NSArray alloc] initWithObjects:@"James",@"Tom",@"Matt",@"Ben",nil];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    UINavigationController *nc = [[UINavigationController alloc] init];
+    // Set up size of view controller
+    
+    [[nc view] setFrame:[[self view] bounds]];
+    [[self view] addSubview:nc.view];
+    
+    // Add the nc's view as a sub view of [self view]
+    
+    PeopleViewController *peopleViewController = [[PeopleViewController alloc] initWithNibName:@"PeopleViewController" bundle:nil];
+    NSArray *viewControllers = [[NSArray alloc] initWithObjects:peopleViewController, nil];
+    
+    // Add viewcontrollers to navigationcontroller
+    
+    [self setNavigationController:nc];
 }
 
 - (void)viewDidUnload

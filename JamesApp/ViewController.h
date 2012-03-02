@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-    NSArray *peopleListArray;
+@interface ViewController : UIViewController {
+    UINavigationController *navigationController;
 }
 
-@property (strong, nonatomic) NSArray *peopleListArray;
+@property (strong, nonatomic) UINavigationController *navigationController;
 
 @end
