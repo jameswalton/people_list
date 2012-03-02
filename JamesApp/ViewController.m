@@ -10,6 +10,30 @@
 
 @implementation ViewController
 
+@synthesize peopleListArray;
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"Tapped row");
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PeopleListTable"];
+    
+    if (cell == nil) {
+        
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"PeopleListTable"];
+        
+    }
+    
+    cell.textLabel.text = [peopleListArray objectAtIndex:indexPath.row];
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [peopleListArray count];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -21,6 +45,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    peopleListArray = [[NSArray alloc] initWithObjects:@"James",@"Tom",@"Matt",@"Ben",nil];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
